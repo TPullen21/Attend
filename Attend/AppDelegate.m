@@ -76,7 +76,8 @@
     NSString *message = @"";
     
     ViewController *viewController = (ViewController*)self.window.rootViewController;
-    viewController.beacons = beacons;
+    viewController.rangedBeacons = beacons;
+    [viewController handleNewRangeOfBeacons];
     [viewController.tableView reloadData];
     
     if(beacons.count > 0) {

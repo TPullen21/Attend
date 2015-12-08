@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD6F6DD71C174720007BE2AD /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F6DD61C174720007BE2AD /* Constants.m */; };
+		DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7D34871C17189F005FE936 /* HTTPGetRequest.m */; };
 		DD86BF761C07675300661B85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF751C07675300661B85 /* main.m */; };
 		DD86BF791C07675300661B85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF781C07675300661B85 /* AppDelegate.m */; };
 		DD86BF7C1C07675300661B85 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF7B1C07675300661B85 /* ViewController.m */; };
@@ -16,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD6F6DD61C174720007BE2AD /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		DD7D34861C17189F005FE936 /* HTTPGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPGetRequest.h; sourceTree = "<group>"; };
+		DD7D34871C17189F005FE936 /* HTTPGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPGetRequest.m; sourceTree = "<group>"; };
 		DD86BF711C07675300661B85 /* Attend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD86BF751C07675300661B85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD86BF771C07675300661B85 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,8 +63,11 @@
 		DD86BF731C07675300661B85 /* Attend */ = {
 			isa = PBXGroup;
 			children = (
+				DD6F6DD61C174720007BE2AD /* Constants.m */,
 				DD86BF771C07675300661B85 /* AppDelegate.h */,
 				DD86BF781C07675300661B85 /* AppDelegate.m */,
+				DD7D34861C17189F005FE936 /* HTTPGetRequest.h */,
+				DD7D34871C17189F005FE936 /* HTTPGetRequest.m */,
 				DD86BF7A1C07675300661B85 /* ViewController.h */,
 				DD86BF7B1C07675300661B85 /* ViewController.m */,
 				DD86BF7D1C07675300661B85 /* Main.storyboard */,
@@ -150,6 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6F6DD71C174720007BE2AD /* Constants.m in Sources */,
+				DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */,
 				DD86BF7C1C07675300661B85 /* ViewController.m in Sources */,
 				DD86BF791C07675300661B85 /* AppDelegate.m in Sources */,
 				DD86BF761C07675300661B85 /* main.m in Sources */,

@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HTTPGetRequest.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+static NSString *studentNumber = @"12345678";
+
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HTTPGetRequestProtocol>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong) NSArray *beacons;
+@property (strong, nonatomic) NSMutableArray *beacons;
+@property (strong, nonatomic) NSArray *rangedBeacons;
+
+- (void)handleNewRangeOfBeacons;
 
 @end
 

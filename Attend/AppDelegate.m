@@ -59,7 +59,7 @@
     NSString *enterMessage = @"You entered the region";
     
     NSLog(@"%@", enterMessage);
-    [self sendLocalNotificationWithMessage:enterMessage];
+    //[self sendLocalNotificationWithMessage:enterMessage];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
@@ -69,7 +69,7 @@
     NSString *exitMessage = @"You left the region";
     
     NSLog(@"%@", exitMessage);
-    [self sendLocalNotificationWithMessage:exitMessage];
+    //[self sendLocalNotificationWithMessage:exitMessage];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {

@@ -10,12 +10,14 @@
 #import "ViewController.h"
 #import "Constants.m"
 #import "LoginViewController.h"
+#import "HTTPPostRequest.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) HTTPGetRequest *httpGetRequest;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
+@property (strong, nonatomic) NSString *studentNumber;
 @property (strong, nonatomic) NSDictionary *classInfo;
 
 @end
@@ -45,6 +47,7 @@
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }
     else {
+        self.studentNumber = studentNumber;
         self.locationManager = [[CLLocationManager alloc] init];
         [self.locationManager requestAlwaysAuthorization];
     }
@@ -108,9 +111,25 @@
         self.moduleNameTextField.text = dict[@"module_name"];
         self.dateFromToTextField.text = [NSString stringWithFormat:@"%@-%@", dict[@"start_time"], dict[@"finish_time"]];
         
-        [self showTextFields];
-        
         self.classInfo = dict;
+        
+        if ([dict[@"attended"] isEqualToString:@"0"]) {
+            
+            [HTTPPostRequest sendPOSTRequestWithDictionary:@{
+                                                             @"studentID" : dict[@"student_id"],
+                                                             @"occurrenceID" : dict[@"occurrence_id"]
+                                                             } atURL:[NSString stringWithFormat:@"%@/recordAttendance.php", DOMAIN_URL]];
+            
+            [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", dict[@"module_name"]]];
+            
+            self.checkedInStatusTextField.text = @"Checked in";
+            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.31 green:0.54 blue:0.06 alpha:1.0];
+        } else {
+            self.checkedInStatusTextField.text = @"Not checked in";
+            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.31 green:0.54 blue:0.06 alpha:1.0];
+        }
+        
+        [self showTextFields];
         
 //        NSString *message = [NSString stringWithFormat:@"Module: %@ Class type: %@ Start: %@ Finish %@", dict[@"module_name"], dict[@"class_type"], dict[@"start_datetime"], dict[@"finish_datetime"] ];
 //        
@@ -129,7 +148,7 @@
     for (CLBeacon *beacon in self.rangedBeacons) {
         if (![self array:self.beacons containsBeacon:beacon]) {
             [self.beacons addObject:beacon];
-            [self.httpGetRequest downloadJSONArrayWithURL:[NSString stringWithFormat:@"%@/getStudentsClassFromBeacon.php?studentNumber=%@&ibMajor=%@&ibMinor=%@", DOMAIN_URL, studentNumber, [beacon.major stringValue], [beacon.minor stringValue]]];
+            [self.httpGetRequest downloadJSONArrayWithURL:[NSString stringWithFormat:@"%@/getStudentsClassFromBeacon.php?studentNumber=%@&ibMajor=%@&ibMinor=%@", DOMAIN_URL, self.studentNumber, [beacon.major stringValue], [beacon.minor stringValue]]];
         }
     }
 }
@@ -147,13 +166,21 @@
 }
 
 - (void)showTextFields {
+    [self.checkedInStatusTextField setHidden:NO];
     [self.moduleNameTextField setHidden:NO];
     [self.dateFromToTextField setHidden:NO];
 }
 
 - (void)hideTextFields {
+    [self.checkedInStatusTextField setHidden:YES];
     [self.moduleNameTextField setHidden:YES];
     [self.dateFromToTextField setHidden:YES];
+}
+
+- (void)sendLocalNotificationWithMessage:(NSString*)message {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = message;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 #pragma mark - Lazy Instantiation

@@ -26,9 +26,9 @@
     NSLog(@"%@", [self authorizationStatus]);
     
     self.locationManager = [[CLLocationManager alloc] init];
-    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
+//    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+//        [self.locationManager requestAlwaysAuthorization];
+//    }
     self.locationManager.delegate = self;
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     [self.locationManager startMonitoringForRegion:beaconRegion];

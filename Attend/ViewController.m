@@ -24,9 +24,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager requestAlwaysAuthorization];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -45,14 +42,10 @@
     if (!studentNumber) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[LoginViewController class]]) {
-        LoginViewController *loginVC = segue.destinationViewController;
+    else {
+        self.locationManager = [[CLLocationManager alloc] init];
+        [self.locationManager requestAlwaysAuthorization];
     }
-    
-    NSLog(@"segue identififer = %@",segue.identifier);
 }
 
 #pragma mark - Table View Delegate Methods

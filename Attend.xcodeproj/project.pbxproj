@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */; };
 		DD6F6DD71C174720007BE2AD /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F6DD61C174720007BE2AD /* Constants.m */; };
 		DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7D34871C17189F005FE936 /* HTTPGetRequest.m */; };
 		DD86BF761C07675300661B85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF751C07675300661B85 /* main.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0DC24A1C1EDD8C00C13D9E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DD6F6DD61C174720007BE2AD /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		DD7D34861C17189F005FE936 /* HTTPGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPGetRequest.h; sourceTree = "<group>"; };
 		DD7D34871C17189F005FE936 /* HTTPGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPGetRequest.m; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 				DD7D34871C17189F005FE936 /* HTTPGetRequest.m */,
 				DD86BF7A1C07675300661B85 /* ViewController.h */,
 				DD86BF7B1C07675300661B85 /* ViewController.m */,
+				DD0DC24A1C1EDD8C00C13D9E /* LoginViewController.h */,
+				DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */,
 				DD86BF7D1C07675300661B85 /* Main.storyboard */,
 				DD86BF801C07675300661B85 /* Assets.xcassets */,
 				DD86BF821C07675300661B85 /* LaunchScreen.storyboard */,
@@ -160,6 +165,7 @@
 			files = (
 				DD6F6DD71C174720007BE2AD /* Constants.m in Sources */,
 				DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */,
+				DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */,
 				DD86BF7C1C07675300661B85 /* ViewController.m in Sources */,
 				DD86BF791C07675300661B85 /* AppDelegate.m in Sources */,
 				DD86BF761C07675300661B85 /* main.m in Sources */,

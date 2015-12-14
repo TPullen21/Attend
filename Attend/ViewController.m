@@ -9,6 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ViewController.h"
 #import "Constants.m"
+#import "LoginViewController.h"
 
 @interface ViewController ()
 
@@ -35,6 +36,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    NSString *studentNumber = [[NSUserDefaults standardUserDefaults] stringForKey:STUDENT_NUMBER_KEY];
+    
+    if (!studentNumber) {
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[LoginViewController class]]) {
+        LoginViewController *loginVC = segue.destinationViewController;
+    }
+    
+    NSLog(@"segue identififer = %@",segue.identifier);
 }
 
 #pragma mark - Table View Delegate Methods

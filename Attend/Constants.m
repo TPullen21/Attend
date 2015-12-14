@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString* DOMAIN_URL = @"http://itsuite.it.brighton.ac.uk/torp10";
-//static NSString* DOMAIN_URL = @"http://pullen.co.uk/development/attend";
+static NSString *const DOMAIN_URL = @"http://itsuite.it.brighton.ac.uk/torp10";
+//static NSString *const DOMAIN_URL = @"http://pullen.co.uk/development/attend";
 
 
 static NSString *const STUDENT_NUMBER_KEY = @"12345678";

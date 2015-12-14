@@ -13,7 +13,11 @@ static NSString *studentNumber = @"12345678";
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HTTPGetRequestProtocol>
 
+@property (strong, nonatomic) IBOutlet UILabel *moduleNameTextField;
+@property (strong, nonatomic) IBOutlet UILabel *dateFromToTextField;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+
 @property (strong, nonatomic) NSMutableArray *beacons;
 @property (strong, nonatomic) NSArray *rangedBeacons;
 

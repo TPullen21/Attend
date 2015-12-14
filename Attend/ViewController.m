@@ -16,6 +16,8 @@
 @property (strong, nonatomic) HTTPGetRequest *httpGetRequest;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
+@property (strong, nonatomic) NSDictionary *classInfo;
+
 @end
 
 @implementation ViewController
@@ -46,6 +48,10 @@
         self.locationManager = [[CLLocationManager alloc] init];
         [self.locationManager requestAlwaysAuthorization];
     }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self hideTextFields];
 }
 
 #pragma mark - Table View Delegate Methods
@@ -98,14 +104,22 @@
     NSDictionary *dict = [array firstObject];
     
     if (dict) {
-        NSString *message = [NSString stringWithFormat:@"Module: %@ Class type: %@ Start: %@ Finish %@", dict[@"module_name"], dict[@"class_type"], dict[@"start_datetime"], dict[@"finish_datetime"] ];
         
+        self.moduleNameTextField.text = dict[@"module_name"];
+        self.dateFromToTextField.text = [NSString stringWithFormat:@"%@-%@", dict[@"start_time"], dict[@"finish_time"]];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!"
-                                                        message:message
-                                                       delegate:self cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        [self showTextFields];
+        
+        self.classInfo = dict;
+        
+//        NSString *message = [NSString stringWithFormat:@"Module: %@ Class type: %@ Start: %@ Finish %@", dict[@"module_name"], dict[@"class_type"], dict[@"start_datetime"], dict[@"finish_datetime"] ];
+//        
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!"
+//                                                        message:message
+//                                                       delegate:self cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
     }
 }
 
@@ -132,6 +146,16 @@
     return containsBeacon;
 }
 
+- (void)showTextFields {
+    [self.moduleNameTextField setHidden:NO];
+    [self.dateFromToTextField setHidden:NO];
+}
+
+- (void)hideTextFields {
+    [self.moduleNameTextField setHidden:YES];
+    [self.dateFromToTextField setHidden:YES];
+}
+
 #pragma mark - Lazy Instantiation
 
 - (HTTPGetRequest *)httpGetRequest {
@@ -148,6 +172,14 @@
     }
     
     return _beacons;
+}
+
+- (NSDictionary *)classInfo {
+    if (!_classInfo) {
+        _classInfo = [[NSDictionary alloc] init];
+    }
+    
+    return _classInfo;
 }
 
 @end

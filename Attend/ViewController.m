@@ -123,10 +123,10 @@
             [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", dict[@"module_name"]]];
             
             self.checkedInStatusTextField.text = @"Checked in";
-            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.31 green:0.54 blue:0.06 alpha:1.0];
+            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         } else {
             self.checkedInStatusTextField.text = @"Not checked in";
-            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.31 green:0.54 blue:0.06 alpha:1.0];
+            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.98 green:0.40 blue:0.37 alpha:1.0];
         }
         
         [self showTextFields];

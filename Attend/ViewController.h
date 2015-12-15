@@ -11,9 +11,9 @@
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HTTPGetRequestProtocol>
 
-@property (strong, nonatomic) IBOutlet UILabel *checkedInStatusTextField;
-@property (strong, nonatomic) IBOutlet UILabel *moduleNameTextField;
-@property (strong, nonatomic) IBOutlet UILabel *dateFromToTextField;
+@property (strong, nonatomic) IBOutlet UILabel *checkedInStatusLabel;
+@property (strong, nonatomic) IBOutlet UILabel *moduleNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateFromToLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 

@@ -11,6 +11,7 @@
 #import "Constants.m"
 #import "LoginViewController.h"
 #import "HTTPPostRequest.h"
+#import "Label.h"
 
 @interface ViewController ()
 
@@ -55,6 +56,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self hideTextFields];
+    ((Label *)self.moduleNameLabel).verticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
 #pragma mark - Table View Delegate Methods
@@ -108,8 +110,8 @@
     
     if (dict) {
         
-        self.moduleNameTextField.text = dict[@"module_name"];
-        self.dateFromToTextField.text = [NSString stringWithFormat:@"%@-%@", dict[@"start_time"], dict[@"finish_time"]];
+        self.moduleNameLabel.text = dict[@"module_name"];
+        self.dateFromToLabel.text = [NSString stringWithFormat:@"%@-%@", dict[@"start_time"], dict[@"finish_time"]];
         
         self.classInfo = dict;
         
@@ -122,11 +124,11 @@
             
             [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", dict[@"module_name"]]];
             
-            self.checkedInStatusTextField.text = @"Checked in";
-            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
+            self.checkedInStatusLabel.text = @"Checked in";
+            self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         } else {
-            self.checkedInStatusTextField.text = @"Not checked in";
-            self.checkedInStatusTextField.backgroundColor = [UIColor colorWithRed:0.98 green:0.40 blue:0.37 alpha:1.0];
+            self.checkedInStatusLabel.text = @"Not checked in";
+            self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.98 green:0.40 blue:0.37 alpha:1.0];
         }
         
         [self showTextFields];
@@ -166,15 +168,15 @@
 }
 
 - (void)showTextFields {
-    [self.checkedInStatusTextField setHidden:NO];
-    [self.moduleNameTextField setHidden:NO];
-    [self.dateFromToTextField setHidden:NO];
+    [self.checkedInStatusLabel setHidden:NO];
+    [self.moduleNameLabel setHidden:NO];
+    [self.dateFromToLabel setHidden:NO];
 }
 
 - (void)hideTextFields {
-    [self.checkedInStatusTextField setHidden:YES];
-    [self.moduleNameTextField setHidden:YES];
-    [self.dateFromToTextField setHidden:YES];
+    [self.checkedInStatusLabel setHidden:YES];
+    [self.moduleNameLabel setHidden:YES];
+    [self.dateFromToLabel setHidden:YES];
 }
 
 - (void)sendLocalNotificationWithMessage:(NSString*)message {

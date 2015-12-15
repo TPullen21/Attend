@@ -54,15 +54,15 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS0-2K-78S">
-                                <rect key="frame" x="20" y="112" width="280" height="75"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ds-Pz-Hgv">
+                                <rect key="frame" x="20" y="273" width="280" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ds-Pz-Hgv">
-                                <rect key="frame" x="20" y="188" width="280" height="21"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS0-2K-78S" customClass="Label">
+                                <rect key="frame" x="20" y="57" width="280" height="208"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -71,9 +71,9 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="checkedInStatusTextField" destination="7K9-It-Qo3" id="2co-iq-8eV"/>
-                        <outlet property="dateFromToTextField" destination="8ds-Pz-Hgv" id="GNf-sQ-KOJ"/>
-                        <outlet property="moduleNameTextField" destination="aS0-2K-78S" id="4Az-I1-Lb2"/>
+                        <outlet property="checkedInStatusLabel" destination="7K9-It-Qo3" id="tZa-eK-eph"/>
+                        <outlet property="dateFromToLabel" destination="8ds-Pz-Hgv" id="qjx-ZD-PQK"/>
+                        <outlet property="moduleNameLabel" destination="aS0-2K-78S" id="tIH-Q4-beB"/>
                         <outlet property="tableView" destination="TLZ-db-z7I" id="Sgd-IA-6ta"/>
                         <segue destination="Beq-mr-kv8" kind="presentation" identifier="loginSegue" id="HwA-47-cgw"/>
                     </connections>

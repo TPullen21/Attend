@@ -18,6 +18,7 @@
 		DD86BF7F1C07675300661B85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF7D1C07675300661B85 /* Main.storyboard */; };
 		DD86BF811C07675300661B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF801C07675300661B85 /* Assets.xcassets */; };
 		DD86BF841C07675300661B85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF821C07675300661B85 /* LaunchScreen.storyboard */; };
+		DD95450B1C20221F0043751F /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = DD95450A1C20221F0043751F /* Label.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		DD86BF801C07675300661B85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD86BF831C07675300661B85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD86BF851C07675300661B85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD9545091C20221F0043751F /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
+		DD95450A1C20221F0043751F /* Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Label.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				DD86BF741C07675300661B85 /* Supporting Files */,
 				DD3487141C1F288B0027E236 /* HTTPPostRequest.h */,
 				DD3487151C1F288B0027E236 /* HTTPPostRequest.m */,
+				DD9545091C20221F0043751F /* Label.h */,
+				DD95450A1C20221F0043751F /* Label.m */,
 			);
 			path = Attend;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			files = (
 				DD6F6DD71C174720007BE2AD /* Constants.m in Sources */,
 				DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */,
+				DD95450B1C20221F0043751F /* Label.m in Sources */,
 				DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */,
 				DD86BF7C1C07675300661B85 /* ViewController.m in Sources */,
 				DD3487161C1F288B0027E236 /* HTTPPostRequest.m in Sources */,

@@ -168,6 +168,17 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    
+    // Make sure the beacon ranging is still going on
+    NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString:@"F8AD3E82-0D91-4D9B-B5C7-7324744B2026"];
+    NSString *regionIdentifier = @"pullen.BeaconModules";
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID identifier:regionIdentifier];
+    
+    self.locationManager.pausesLocationUpdatesAutomatically = NO;
+    [self.locationManager startMonitoringForRegion:beaconRegion];
+    [self.locationManager startRangingBeaconsInRegion:beaconRegion];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

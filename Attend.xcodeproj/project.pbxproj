@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */; };
-		DD23F45A1C1F3F2C00BEB500 /* whitetick120.png in Resources */ = {isa = PBXBuildFile; fileRef = DD23F4591C1F3F2C00BEB500 /* whitetick120.png */; };
 		DD3487161C1F288B0027E236 /* HTTPPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3487151C1F288B0027E236 /* HTTPPostRequest.m */; };
 		DD6F6DD71C174720007BE2AD /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F6DD61C174720007BE2AD /* Constants.m */; };
 		DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7D34871C17189F005FE936 /* HTTPGetRequest.m */; };
@@ -19,12 +18,12 @@
 		DD86BF811C07675300661B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF801C07675300661B85 /* Assets.xcassets */; };
 		DD86BF841C07675300661B85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF821C07675300661B85 /* LaunchScreen.storyboard */; };
 		DD95450B1C20221F0043751F /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = DD95450A1C20221F0043751F /* Label.m */; };
+		DD95450F1C202D300043751F /* whitetick120.png in Resources */ = {isa = PBXBuildFile; fileRef = DD95450E1C202D300043751F /* whitetick120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD0DC24A1C1EDD8C00C13D9E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		DD23F4591C1F3F2C00BEB500 /* whitetick120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitetick120.png; sourceTree = "<group>"; };
 		DD3487141C1F288B0027E236 /* HTTPPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPPostRequest.h; sourceTree = "<group>"; };
 		DD3487151C1F288B0027E236 /* HTTPPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPPostRequest.m; sourceTree = "<group>"; };
 		DD6F6DD61C174720007BE2AD /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		DD86BF851C07675300661B85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD9545091C20221F0043751F /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
 		DD95450A1C20221F0043751F /* Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Label.m; sourceTree = "<group>"; };
+		DD95450E1C202D300043751F /* whitetick120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitetick120.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 		DD86BF741C07675300661B85 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DD23F4591C1F3F2C00BEB500 /* whitetick120.png */,
+				DD95450E1C202D300043751F /* whitetick120.png */,
 				DD86BF751C07675300661B85 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -165,7 +165,7 @@
 			files = (
 				DD86BF841C07675300661B85 /* LaunchScreen.storyboard in Resources */,
 				DD86BF811C07675300661B85 /* Assets.xcassets in Resources */,
-				DD23F45A1C1F3F2C00BEB500 /* whitetick120.png in Resources */,
+				DD95450F1C202D300043751F /* whitetick120.png in Resources */,
 				DD86BF7F1C07675300661B85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

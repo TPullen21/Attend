@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */; };
+		DD271F7A1CAAE8E600BFAA4C /* ViewAttendanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD271F791CAAE8E600BFAA4C /* ViewAttendanceViewController.m */; };
 		DD3487161C1F288B0027E236 /* HTTPPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3487151C1F288B0027E236 /* HTTPPostRequest.m */; };
 		DD6F6DD71C174720007BE2AD /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6F6DD61C174720007BE2AD /* Constants.m */; };
 		DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7D34871C17189F005FE936 /* HTTPGetRequest.m */; };
@@ -24,6 +25,8 @@
 /* Begin PBXFileReference section */
 		DD0DC24A1C1EDD8C00C13D9E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		DD271F781CAAE8E600BFAA4C /* ViewAttendanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewAttendanceViewController.h; sourceTree = "<group>"; };
+		DD271F791CAAE8E600BFAA4C /* ViewAttendanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewAttendanceViewController.m; sourceTree = "<group>"; };
 		DD3487141C1F288B0027E236 /* HTTPPostRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPPostRequest.h; sourceTree = "<group>"; };
 		DD3487151C1F288B0027E236 /* HTTPPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPPostRequest.m; sourceTree = "<group>"; };
 		DD6F6DD61C174720007BE2AD /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 				DD3487151C1F288B0027E236 /* HTTPPostRequest.m */,
 				DD9545091C20221F0043751F /* Label.h */,
 				DD95450A1C20221F0043751F /* Label.m */,
+				DD271F781CAAE8E600BFAA4C /* ViewAttendanceViewController.h */,
+				DD271F791CAAE8E600BFAA4C /* ViewAttendanceViewController.m */,
 			);
 			path = Attend;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD6F6DD71C174720007BE2AD /* Constants.m in Sources */,
+				DD271F7A1CAAE8E600BFAA4C /* ViewAttendanceViewController.m in Sources */,
 				DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */,
 				DD95450B1C20221F0043751F /* Label.m in Sources */,
 				DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */,

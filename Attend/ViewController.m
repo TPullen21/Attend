@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "Constants.m"
 #import "LoginViewController.h"
+#import "ViewAttendanceViewController.h"
 #import "HTTPPostRequest.h"
 #import "Label.h"
 
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (strong, nonatomic) NSString *studentNumber;
+@property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSDictionary *classInfo;
 
 @end
@@ -43,25 +45,35 @@
 - (void)viewDidAppear:(BOOL)animated {
     
     NSString *studentNumber = [[NSUserDefaults standardUserDefaults] stringForKey:STUDENT_NUMBER_KEY];
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:TOKEN_KEY];
     
-    if (!studentNumber) {
+    if (!studentNumber || !token) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }
     else {
         self.studentNumber = studentNumber;
+        self.token = token;
         self.locationManager = [[CLLocationManager alloc] init];
         [self.locationManager requestAlwaysAuthorization];
     }
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [self hideTextFields];
     ((Label *)self.moduleNameLabel).verticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.destinationViewController isKindOfClass:[ViewAttendanceViewController class]] ) {
+        ViewAttendanceViewController *viewAttendanceVC = segue.destinationViewController;
+        viewAttendanceVC.studentNumber = self.studentNumber;
+        viewAttendanceVC.token = self.token;
+    }
+}
+
 #pragma mark - Table View Delegate Methods
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
@@ -145,6 +157,10 @@
 }
 
 #pragma mark - Helper Methods
+
+- (IBAction)viewAttendanceButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"showViewAttendanceVC" sender:nil];
+}
 
 - (void)handleNewRangeOfBeacons {
     for (CLBeacon *beacon in self.rangedBeacons) {

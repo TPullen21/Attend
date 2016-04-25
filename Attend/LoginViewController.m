@@ -23,6 +23,7 @@ static int const CONSTANT = 100000;
         if ([self tokenIsCorrect:token forStudentNumber:studentNumber]) {
             NSLog(@"Correct!");
             [[NSUserDefaults standardUserDefaults] setObject:studentNumber forKey:STUDENT_NUMBER_KEY];
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:TOKEN_KEY];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self dismissViewControllerAnimated:YES completion:nil];
             

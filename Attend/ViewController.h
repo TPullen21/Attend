@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *beacons;
 @property (strong, nonatomic) NSArray *rangedBeacons;
 
+- (IBAction)viewAttendanceButtonPressed:(id)sender;
 - (void)handleNewRangeOfBeacons;
 
 @end

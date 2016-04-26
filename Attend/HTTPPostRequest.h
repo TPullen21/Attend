@@ -10,6 +10,6 @@
 
 @interface HTTPPostRequest : NSObject <NSURLConnectionDataDelegate>
 
-+ (void)sendPOSTRequestWithDictionary:(NSDictionary *)dictionary atURL:(NSString *)url;
++ (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url;
 
 @end

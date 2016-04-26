@@ -10,7 +10,7 @@
 
 @protocol HTTPGetRequestProtocol <NSObject>
 
-- (void)arrayDownloaded:(NSArray *)array;
+- (void)arrayDownloaded:(NSDictionary *)array;
 
 @end
 
@@ -18,6 +18,6 @@
 
 @property (nonatomic, weak) id<HTTPGetRequestProtocol> delegate;
 
-- (void)downloadJSONArrayWithURL:(NSString *)url;
+- (void)downloadJSONArrayWithURL:(NSString *)url withDictionaryForHeaders:(NSDictionary *)headerDictionary;
 
 @end

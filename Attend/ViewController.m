@@ -117,9 +117,9 @@
 
 #pragma mark - HTTPGetRequest Protocol Methods
 
-- (void)arrayDownloaded:(NSArray *)array {
-    NSDictionary *dict = [array firstObject];
-    
+- (void)arrayDownloaded:(NSDictionary *)array {
+    //NSDictionary *dict = [array firstObject];
+    NSDictionary *dict = array;
     if (dict) {
         
         self.moduleNameLabel.text = dict[@"module_name"];
@@ -129,10 +129,9 @@
         
         if ([dict[@"attended"] isEqualToString:@"0"]) {
             
-            [HTTPPostRequest sendPOSTRequestWithDictionary:@{
-                                                             @"studentID" : dict[@"student_id"],
-                                                             @"occurrenceID" : dict[@"occurrence_id"]
-                                                             } atURL:[NSString stringWithFormat:@"%@/recordAttendance.php", DOMAIN_URL]];
+            NSDictionary *urlRequestHeaderDictionary = @{REQUEST_HEADER_KEY_TOKEN : self.token};
+            
+            [HTTPPostRequest sendPOSTRequestWithHeadersDictionary:urlRequestHeaderDictionary atURL:[NSString stringWithFormat:@"%@/attend/student/%@/class/%@", DOMAIN_URL, dict[@"student_id"], dict[@"occurrence_id"]]];
             
             [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", dict[@"module_name"]]];
             
@@ -166,7 +165,14 @@
     for (CLBeacon *beacon in self.rangedBeacons) {
         if (![self array:self.beacons containsBeacon:beacon]) {
             [self.beacons addObject:beacon];
-            [self.httpGetRequest downloadJSONArrayWithURL:[NSString stringWithFormat:@"%@/getStudentsClassFromBeacon.php?studentNumber=%@&ibMajor=%@&ibMinor=%@", DOMAIN_URL, self.studentNumber, [beacon.major stringValue], [beacon.minor stringValue]]];
+            
+            NSDictionary *urlRequestHeaderDictionary = @{
+                                                         REQUEST_HEADER_KEY_TOKEN : self.token,
+                                                         REQUEST_HEADER_KEY_BEACON_MINOR : [beacon.minor stringValue],
+                                                         REQUEST_HEADER_KEY_BEACON_MAJOR : [beacon.major stringValue]
+                                                        };
+            
+            [self.httpGetRequest downloadJSONArrayWithURL:[NSString stringWithFormat:@"%@%@/%@", DOMAIN_URL, STUDENT_CLASS_INFO_ROUTE, self.studentNumber] withDictionaryForHeaders:urlRequestHeaderDictionary];
         }
     }
 }

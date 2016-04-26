@@ -17,35 +17,22 @@
 
 @implementation HTTPPostRequest
 
-+ (void)sendPOSTRequestWithDictionary:(NSDictionary *)dictionary atURL:(NSString *)url {
++ (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url {
     
-    NSMutableURLRequest *postRequest=[NSMutableURLRequest
-                                     requestWithURL:[NSURL URLWithString:url]
-                                     cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                     timeoutInterval:60.0];
-    
-    NSError *error;
-    
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                       options:NSJSONWritingPrettyPrinted error:&error];
+    NSMutableURLRequest *postRequest= [[NSMutableURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     
     [postRequest setHTTPMethod:@"POST"];
     
-    [postRequest addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    // should check for and handle errors here but we aren't
-    [postRequest setHTTPBody:jsonData];
+    for (NSString *key in [dictionary allKeys]) {
+        [postRequest addValue:dictionary[key] forHTTPHeaderField:key];
+    }
     
     [NSURLConnection sendAsynchronousRequest:postRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
-            //do something with error
         } else {
             NSString *responseText = [[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding];
             NSLog(@"Response: %@", responseText);
-            
-            NSString *newLineStr = @"\n";
-            responseText = [responseText stringByReplacingOccurrencesOfString:@"<br />" withString:newLineStr];
         }
     }];
 }

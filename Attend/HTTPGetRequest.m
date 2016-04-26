@@ -16,12 +16,18 @@
 
 @implementation HTTPGetRequest
 
-- (void)downloadJSONArrayWithURL:(NSString *)url {
+- (void)downloadJSONArrayWithURL:(NSString *)url withDictionaryForHeaders:(NSDictionary *)headerDictionary {
     // Download the json file
     NSURL *jsonFileUrl = [NSURL URLWithString:url];
     
     // Create the request
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:jsonFileUrl];
+    
+    for (NSString *key in [headerDictionary allKeys]) {
+        [urlRequest addValue:headerDictionary[key] forHTTPHeaderField:key];
+    }
+    
+    NSLog(url);
     
     // Create the NSURLConnection
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
@@ -43,7 +49,7 @@
     
     NSError *error;
     
-    NSArray *jsonArray = (NSArray *)[NSJSONSerialization JSONObjectWithData:self.downloadedData options:NSJSONReadingAllowFragments error:&error];
+    NSDictionary *jsonArray = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:self.downloadedData options:NSJSONReadingAllowFragments error:&error];
     
     // Ready to notify delegate that data is ready and pass back items
     if (self.delegate) {

@@ -23,3 +23,12 @@ static NSString *const TOKEN_KEY = @"token_number";
 static NSString *const REQUEST_HEADER_KEY_TOKEN = @"token";
 static NSString *const REQUEST_HEADER_KEY_BEACON_MINOR = @"beacon_minor";
 static NSString *const REQUEST_HEADER_KEY_BEACON_MAJOR = @"beacon_major";
+
+static NSString *const CURRENT_CLASS_MODULE_NAME_KEY = @"module_name";
+static NSString *const CURRENT_CLASS_START_TIME_KEY = @"start_time";
+static NSString *const CURRENT_CLASS_FINISH_TIME_KEY = @"finish_time";
+static NSString *const CURRENT_CLASS_STUDENT_ID_KEY = @"student_id";
+static NSString *const CURRENT_CLASS_OCCURRENCE_KEY = @"occurrence_id";
+static NSString *const CURRENT_CLASS_ATTENDED_KEY = @"attended";
+
+static double const BEACON_ARRAY_REFRESH_RATE = 60; // Seconds

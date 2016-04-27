@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "HomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -63,7 +63,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     
-    ViewController *viewController = (ViewController*)self.window.rootViewController;
+    HomeViewController *viewController = (HomeViewController*)self.window.rootViewController;
     viewController.rangedBeacons = beacons;
     [viewController handleNewRangeOfBeacons];
     [viewController.tableView reloadData];

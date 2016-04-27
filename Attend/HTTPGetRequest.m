@@ -47,11 +47,11 @@
     
     NSError *error;
     
-    NSDictionary *jsonArray = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:self.downloadedData options:NSJSONReadingAllowFragments error:&error];
+    NSDictionary *jsonDict = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:self.downloadedData options:NSJSONReadingAllowFragments error:&error];
     
     // Ready to notify delegate that data is ready and pass back items
     if (self.delegate) {
-        [self.delegate arrayDownloaded:jsonArray];
+        [self.delegate dictionaryDownloaded:jsonDict];
     }
 }
 

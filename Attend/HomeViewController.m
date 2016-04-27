@@ -7,14 +7,14 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "Constants.m"
 #import "LoginViewController.h"
 #import "ViewAttendanceViewController.h"
 #import "HTTPPostRequest.h"
 #import "Label.h"
 
-@interface ViewController ()
+@interface HomeViewController ()
 
 @property (strong, nonatomic) HTTPGetRequest *httpGetRequest;
 @property (strong, nonatomic) HTTPPostRequest *httpPostRequest;
@@ -22,12 +22,12 @@
 
 @property (strong, nonatomic) NSString *studentNumber;
 @property (strong, nonatomic) NSString *token;
-@property (strong, nonatomic) NSDictionary *classInfo;
-@property (strong, nonatomic) NSString *currentClassModuleName;
+@property (strong, nonatomic) NSDictionary *currentClassInfo;
+@property (strong, nonatomic) NSDate *datetimeOfLastBeaconWipe;
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +50,7 @@
     NSString *studentNumber = [[NSUserDefaults standardUserDefaults] stringForKey:STUDENT_NUMBER_KEY];
     NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:TOKEN_KEY];
     
+    // If the user hasn't logged in, send them to the log in screen
     if (!studentNumber || !token) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }
@@ -111,8 +112,8 @@
     
     cell.textLabel.text = proximityLabel;
     
-    NSString *detailLabel = [NSString stringWithFormat:@"Major: %d, Minor: %d, RSSI: %d, UUID: %@",
-                             beacon.major.intValue, beacon.minor.intValue, (int)beacon.rssi, beacon.proximityUUID.UUIDString];
+    NSString *detailLabel = [NSString stringWithFormat:@"Major: %d, Minor: %d, UUID: %@",
+                             beacon.major.intValue, beacon.minor.intValue, beacon.proximityUUID.UUIDString];
     cell.detailTextLabel.text = detailLabel;
     
     return cell;
@@ -120,51 +121,44 @@
 
 #pragma mark - HTTPGetRequest Protocol Methods
 
-- (void)arrayDownloaded:(NSDictionary *)array {
-    //NSDictionary *dict = [array firstObject];
-    NSDictionary *dict = array;
+- (void)dictionaryDownloaded:(NSDictionary *)dict {
+    
     if (dict) {
         
-        self.moduleNameLabel.text = dict[@"module_name"];
-        self.dateFromToLabel.text = [NSString stringWithFormat:@"%@-%@", dict[@"start_time"], dict[@"finish_time"]];
+        self.currentClassInfo = dict;
         
-        self.classInfo = dict;
+        self.moduleNameLabel.text = dict[CURRENT_CLASS_MODULE_NAME_KEY];
+        self.dateFromToLabel.text = [NSString stringWithFormat:@"%@-%@", dict[CURRENT_CLASS_START_TIME_KEY], dict[CURRENT_CLASS_FINISH_TIME_KEY]];
         
-        if ([dict[@"attended"] isEqualToString:@"0"]) {
+        // If the student hasn't been recorded as attendance, show this and then record their attendance
+        if ([dict[CURRENT_CLASS_ATTENDED_KEY] isEqualToString:@"0"]) {
             
             self.checkedInStatusLabel.text = @"Not checked in";
             self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.98 green:0.40 blue:0.37 alpha:1.0];
             
             NSDictionary *urlRequestHeaderDictionary = @{REQUEST_HEADER_KEY_TOKEN : self.token};
             
-            [self.httpPostRequest sendPOSTRequestWithHeadersDictionary:urlRequestHeaderDictionary atURL:[NSString stringWithFormat:@"%@/attend/student/%@/class/%@", DOMAIN_URL, dict[@"student_id"], dict[@"occurrence_id"]]];
-            
-            self.currentClassModuleName = dict[@"module_name"];
+            [self.httpPostRequest sendPOSTRequestWithHeadersDictionary:urlRequestHeaderDictionary atURL:[NSString stringWithFormat:@"%@/attend/student/%@/class/%@", DOMAIN_URL, dict[CURRENT_CLASS_STUDENT_ID_KEY], dict[CURRENT_CLASS_OCCURRENCE_KEY]]];
         } else {
             self.checkedInStatusLabel.text = @"Checked in";
             self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         }
         
         [self showTextFields];
-        
-//        NSString *message = [NSString stringWithFormat:@"Module: %@ Class type: %@ Start: %@ Finish %@", dict[@"module_name"], dict[@"class_type"], dict[@"start_datetime"], dict[@"finish_datetime"] ];
-//        
-//        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check in!"
-//                                                        message:message
-//                                                       delegate:self cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
     }
 }
 
+#pragma mark - HTTPPostRequest Protocol Methods
+
 - (void)httpStatusCodeReturned:(NSString *)httpHtatusCode {
+    
+    // If the status code returned for the attend POST request, the attendance has successfully been recorded
     if ([httpHtatusCode isEqualToString:@"204"]) {
         self.checkedInStatusLabel.text = @"Checked in";
         self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         
-        [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", self.currentClassModuleName]];
-        NSLog(@"Checked into %@", self.currentClassModuleName);
+        [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", self.currentClassInfo[CURRENT_CLASS_MODULE_NAME_KEY]]];
+        NSLog(@"Checked into %@", self.currentClassInfo[CURRENT_CLASS_MODULE_NAME_KEY]);
     }
     
 }
@@ -176,15 +170,25 @@
 }
 
 - (void)handleNewRangeOfBeacons {
+        
+    // For every x amount of seconds, clear the local array of beacons
+    if (-[self.datetimeOfLastBeaconWipe timeIntervalSinceNow] > BEACON_ARRAY_REFRESH_RATE) {
+        self.beacons = [[NSMutableArray alloc] init];
+        self.datetimeOfLastBeaconWipe = [[NSDate alloc] init];
+    }
+    
+    // For every ranged beacon, if we haven't already ranged it, add it to our local array and see if the current student has a class for that beacon
     for (CLBeacon *beacon in self.rangedBeacons) {
+        
         if (![self array:self.beacons containsBeacon:beacon]) {
             [self.beacons addObject:beacon];
             
-            NSDictionary *urlRequestHeaderDictionary = @{
-                                                         REQUEST_HEADER_KEY_TOKEN : self.token,
-                                                         REQUEST_HEADER_KEY_BEACON_MINOR : [beacon.minor stringValue],
-                                                         REQUEST_HEADER_KEY_BEACON_MAJOR : [beacon.major stringValue]
-                                                        };
+            NSDictionary *urlRequestHeaderDictionary =
+                @{
+                    REQUEST_HEADER_KEY_TOKEN : self.token,
+                    REQUEST_HEADER_KEY_BEACON_MINOR : [beacon.minor stringValue],
+                    REQUEST_HEADER_KEY_BEACON_MAJOR : [beacon.major stringValue]
+                 };
             
             [self.httpGetRequest downloadJSONArrayWithURL:[NSString stringWithFormat:@"%@%@/%@", DOMAIN_URL, STUDENT_CLASS_INFO_ROUTE, self.studentNumber] withDictionaryForHeaders:urlRequestHeaderDictionary];
         }
@@ -231,6 +235,7 @@
     
     return _httpGetRequest;
 }
+
 - (HTTPPostRequest *)httpPostRequest {
     if (!_httpPostRequest) {
         _httpPostRequest = [[HTTPPostRequest alloc] init];
@@ -248,11 +253,21 @@
 }
 
 - (NSDictionary *)classInfo {
-    if (!_classInfo) {
-        _classInfo = [[NSDictionary alloc] init];
+    if (!_currentClassInfo) {
+        _currentClassInfo = [[NSDictionary alloc] init];
     }
     
-    return _classInfo;
+    return _currentClassInfo;
+}
+
+- (NSDate *)datetimeOfLastBeaconWipe {
+
+    if (!_datetimeOfLastBeaconWipe) {
+        _datetimeOfLastBeaconWipe = [[NSDate alloc] init];
+    }
+    
+    return _datetimeOfLastBeaconWipe;
+    
 }
 
 @end

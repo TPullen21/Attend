@@ -14,7 +14,7 @@
 		DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7D34871C17189F005FE936 /* HTTPGetRequest.m */; };
 		DD86BF761C07675300661B85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF751C07675300661B85 /* main.m */; };
 		DD86BF791C07675300661B85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF781C07675300661B85 /* AppDelegate.m */; };
-		DD86BF7C1C07675300661B85 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF7B1C07675300661B85 /* ViewController.m */; };
+		DD86BF7C1C07675300661B85 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD86BF7B1C07675300661B85 /* HomeViewController.m */; };
 		DD86BF7F1C07675300661B85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF7D1C07675300661B85 /* Main.storyboard */; };
 		DD86BF811C07675300661B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF801C07675300661B85 /* Assets.xcassets */; };
 		DD86BF841C07675300661B85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD86BF821C07675300661B85 /* LaunchScreen.storyboard */; };
@@ -36,8 +36,8 @@
 		DD86BF751C07675300661B85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD86BF771C07675300661B85 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DD86BF781C07675300661B85 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DD86BF7A1C07675300661B85 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DD86BF7B1C07675300661B85 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DD86BF7A1C07675300661B85 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		DD86BF7B1C07675300661B85 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		DD86BF7E1C07675300661B85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD86BF801C07675300661B85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD86BF831C07675300661B85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -82,8 +82,8 @@
 				DD86BF781C07675300661B85 /* AppDelegate.m */,
 				DD7D34861C17189F005FE936 /* HTTPGetRequest.h */,
 				DD7D34871C17189F005FE936 /* HTTPGetRequest.m */,
-				DD86BF7A1C07675300661B85 /* ViewController.h */,
-				DD86BF7B1C07675300661B85 /* ViewController.m */,
+				DD86BF7A1C07675300661B85 /* HomeViewController.h */,
+				DD86BF7B1C07675300661B85 /* HomeViewController.m */,
 				DD0DC24A1C1EDD8C00C13D9E /* LoginViewController.h */,
 				DD0DC24B1C1EDD8C00C13D9E /* LoginViewController.m */,
 				DD86BF7D1C07675300661B85 /* Main.storyboard */,
@@ -187,7 +187,7 @@
 				DD7D34881C17189F005FE936 /* HTTPGetRequest.m in Sources */,
 				DD95450B1C20221F0043751F /* Label.m in Sources */,
 				DD0DC24C1C1EDD8C00C13D9E /* LoginViewController.m in Sources */,
-				DD86BF7C1C07675300661B85 /* ViewController.m in Sources */,
+				DD86BF7C1C07675300661B85 /* HomeViewController.m in Sources */,
 				DD3487161C1F288B0027E236 /* HTTPPostRequest.m in Sources */,
 				DD86BF791C07675300661B85 /* AppDelegate.m in Sources */,
 				DD86BF761C07675300661B85 /* main.m in Sources */,

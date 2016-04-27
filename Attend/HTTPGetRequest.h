@@ -10,7 +10,7 @@
 
 @protocol HTTPGetRequestProtocol <NSObject>
 
-- (void)arrayDownloaded:(NSDictionary *)array;
+- (void)dictionaryDownloaded:(NSDictionary *)dict;
 
 @end
 

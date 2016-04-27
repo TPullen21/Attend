@@ -17,9 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TLZ-db-z7I">
+                            <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TLZ-db-z7I">
                                 <rect key="frame" x="0.0" y="496" width="320" height="72"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="Zae-wd-n5B"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="beaconCell" textLabel="9qj-RH-mtW" detailTextLabel="f69-c3-aRi" style="IBUITableViewCellStyleSubtitle" id="5PG-zh-loC">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
@@ -47,36 +50,77 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7K9-It-Qo3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS0-2K-78S" customClass="Label">
+                                <rect key="frame" x="20" y="271" width="280" height="25.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7K9-It-Qo3">
                                 <rect key="frame" x="0.0" y="20" width="320" height="21"/>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.34509803919999998" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ds-Pz-Hgv">
-                                <rect key="frame" x="20" y="273" width="280" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attend" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ac-bg-8S1">
+                                <rect key="frame" x="0.0" y="51" width="320" height="25.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8Z-f5-fZi">
+                                <rect key="frame" x="20" y="446" width="280" height="40"/>
+                                <color key="backgroundColor" red="0.47843137250000001" green="0.63137254899999995" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="br3-VB-Sf5"/>
+                                </constraints>
+                                <state key="normal" title="View Attendance">
+                                    <color key="titleColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                </state>
+                                <connections>
+                                    <action selector="viewAttendanceButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="44v-Sq-eY4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ds-Pz-Hgv">
+                                <rect key="frame" x="20" y="317" width="280" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aS0-2K-78S" customClass="Label">
-                                <rect key="frame" x="20" y="57" width="280" height="208"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIy-AV-7Zq">
-                                <rect key="frame" x="197" y="458" width="116" height="30"/>
-                                <state key="normal" title="View Attendance">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="viewAttendanceButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yLT-P6-PKK"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.34509803919999998" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="7K9-It-Qo3" firstAttribute="top" secondItem="4ac-bg-8S1" secondAttribute="bottom" constant="10" id="1We-ft-MwU"/>
+                            <constraint firstItem="TLZ-db-z7I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="25B-3L-yLm"/>
+                            <constraint firstAttribute="trailing" secondItem="4ac-bg-8S1" secondAttribute="trailing" id="4DH-up-ziY"/>
+                            <constraint firstItem="U8Z-f5-fZi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="5Td-AS-wQN"/>
+                            <constraint firstAttribute="trailing" secondItem="8ds-Pz-Hgv" secondAttribute="trailing" constant="20" id="7Fe-0m-CoP"/>
+                            <constraint firstItem="TLZ-db-z7I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Eod-v1-7Iq"/>
+                            <constraint firstItem="4ac-bg-8S1" firstAttribute="top" secondItem="7K9-It-Qo3" secondAttribute="bottom" constant="10" id="Fyc-qr-ygY"/>
+                            <constraint firstItem="aS0-2K-78S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="H5x-SE-Qgq"/>
+                            <constraint firstItem="TLZ-db-z7I" firstAttribute="top" secondItem="U8Z-f5-fZi" secondAttribute="bottom" constant="10" id="Nz4-Oc-LN4"/>
+                            <constraint firstItem="4ac-bg-8S1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Px8-wJ-RCq"/>
+                            <constraint firstItem="8ds-Pz-Hgv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Qrj-W6-Uha"/>
+                            <constraint firstAttribute="trailing" secondItem="aS0-2K-78S" secondAttribute="trailing" constant="20" id="U8Y-ZF-Z9H"/>
+                            <constraint firstAttribute="trailing" secondItem="7K9-It-Qo3" secondAttribute="trailing" id="UH7-y8-mjb"/>
+                            <constraint firstItem="7K9-It-Qo3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eLL-je-PGh"/>
+                            <constraint firstItem="aS0-2K-78S" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="exX-an-zVE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TLZ-db-z7I" secondAttribute="bottom" id="f7o-uW-aWn"/>
+                            <constraint firstItem="8ds-Pz-Hgv" firstAttribute="top" secondItem="aS0-2K-78S" secondAttribute="bottom" constant="20" id="kC7-8P-N2b"/>
+                            <constraint firstAttribute="trailing" secondItem="TLZ-db-z7I" secondAttribute="trailing" id="m1Q-IB-4Pu"/>
+                            <constraint firstItem="7K9-It-Qo3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mrv-hh-PqO"/>
+                            <constraint firstItem="4ac-bg-8S1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="ohr-oz-zno"/>
+                            <constraint firstAttribute="trailing" secondItem="TLZ-db-z7I" secondAttribute="trailing" id="r0p-8Z-oJR"/>
+                            <constraint firstAttribute="trailing" secondItem="U8Z-f5-fZi" secondAttribute="trailing" constant="20" id="vF0-ae-Dor"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TLZ-db-z7I" secondAttribute="bottom" id="w4L-xa-D4b"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1We-ft-MwU"/>
+                                <exclude reference="ohr-oz-zno"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

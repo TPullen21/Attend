@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSString *studentNumber;
 @property (strong, nonatomic) NSString *token;
 
+- (IBAction)closeButtonPressed:(id)sender;
+
 @end

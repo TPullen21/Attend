@@ -22,7 +22,7 @@
     self.webView.delegate = self;
     
     NSString *urlString = [NSString stringWithFormat:@"%@/student/%@/token/%@", WEB_APP_URL, self.studentNumber, self.token];
-    NSLog(urlString);
+    
     NSURL *url = [[NSURL alloc] initWithString:urlString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     //self.webView.scalesPageToFit = YES;
@@ -44,4 +44,7 @@
 }
 */
 
+- (IBAction)closeButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

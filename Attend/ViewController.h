@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HTTPGetRequest.h"
+#import "HTTPPostRequest.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HTTPGetRequestProtocol>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HTTPGetRequestProtocol, HTTPPostRequestProtocol>
 
 @property (strong, nonatomic) IBOutlet UILabel *checkedInStatusLabel;
 @property (strong, nonatomic) IBOutlet UILabel *moduleNameLabel;

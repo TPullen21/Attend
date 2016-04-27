@@ -27,8 +27,6 @@
         [urlRequest addValue:headerDictionary[key] forHTTPHeaderField:key];
     }
     
-    NSLog(url);
-    
     // Create the NSURLConnection
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
 }

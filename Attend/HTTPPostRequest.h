@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HTTPPostRequestProtocol <NSObject>
+
+- (void)httpStatusCodeReturned:(NSString *)httpStatusCode;
+
+@end
+
 @interface HTTPPostRequest : NSObject <NSURLConnectionDataDelegate>
 
-+ (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url;
+@property (nonatomic, weak) id<HTTPPostRequestProtocol> delegate;
+
+- (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url;
 
 @end

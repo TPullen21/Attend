@@ -17,11 +17,13 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) HTTPGetRequest *httpGetRequest;
+@property (strong, nonatomic) HTTPPostRequest *httpPostRequest;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (strong, nonatomic) NSString *studentNumber;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSDictionary *classInfo;
+@property (strong, nonatomic) NSString *currentClassModuleName;
 
 @end
 
@@ -35,6 +37,7 @@
     self.tableView.dataSource = self;
     
     self.httpGetRequest.delegate = self;
+    self.httpPostRequest.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,17 +132,17 @@
         
         if ([dict[@"attended"] isEqualToString:@"0"]) {
             
-            NSDictionary *urlRequestHeaderDictionary = @{REQUEST_HEADER_KEY_TOKEN : self.token};
-            
-            [HTTPPostRequest sendPOSTRequestWithHeadersDictionary:urlRequestHeaderDictionary atURL:[NSString stringWithFormat:@"%@/attend/student/%@/class/%@", DOMAIN_URL, dict[@"student_id"], dict[@"occurrence_id"]]];
-            
-            [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", dict[@"module_name"]]];
-            
-            self.checkedInStatusLabel.text = @"Checked in";
-            self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
-        } else {
             self.checkedInStatusLabel.text = @"Not checked in";
             self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.98 green:0.40 blue:0.37 alpha:1.0];
+            
+            NSDictionary *urlRequestHeaderDictionary = @{REQUEST_HEADER_KEY_TOKEN : self.token};
+            
+            [self.httpPostRequest sendPOSTRequestWithHeadersDictionary:urlRequestHeaderDictionary atURL:[NSString stringWithFormat:@"%@/attend/student/%@/class/%@", DOMAIN_URL, dict[@"student_id"], dict[@"occurrence_id"]]];
+            
+            self.currentClassModuleName = dict[@"module_name"];
+        } else {
+            self.checkedInStatusLabel.text = @"Checked in";
+            self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         }
         
         [self showTextFields];
@@ -153,6 +156,16 @@
 //                                              otherButtonTitles:nil];
 //        [alert show];
     }
+}
+
+- (void)httpStatusCodeReturned:(NSString *)httpHtatusCode {
+    if ([httpHtatusCode isEqualToString:@"204"]) {
+        self.checkedInStatusLabel.text = @"Checked in";
+        self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
+        
+        [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", self.currentClassModuleName]];
+    }
+    
 }
 
 #pragma mark - Helper Methods
@@ -215,6 +228,13 @@
     }
     
     return _httpGetRequest;
+}
+- (HTTPPostRequest *)httpPostRequest {
+    if (!_httpPostRequest) {
+        _httpPostRequest = [[HTTPPostRequest alloc] init];
+    }
+    
+    return _httpPostRequest;
 }
 
 - (NSMutableArray *)beacons {

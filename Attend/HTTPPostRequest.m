@@ -11,13 +11,13 @@
 
 @interface HTTPPostRequest()
 
-@property (strong, nonatomic) NSMutableData *downloadedData;
+@property (strong, nonatomic) NSString *httpStatusCode;
 
 @end
 
 @implementation HTTPPostRequest
 
-+ (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url {
+- (void)sendPOSTRequestWithHeadersDictionary:(NSDictionary *)dictionary atURL:(NSString *)url {
     
     NSMutableURLRequest *postRequest= [[NSMutableURLRequest alloc] initWithURL:[[NSURL alloc] initWithString:url]];
     
@@ -27,26 +27,17 @@
         [postRequest addValue:dictionary[key] forHTTPHeaderField:key];
     }
     
-    [NSURLConnection sendAsynchronousRequest:postRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        } else {
-            NSString *responseText = [[NSString alloc] initWithData:data encoding: NSASCIIStringEncoding];
-            NSLog(@"Response: %@", responseText);
-        }
-    }];
+    [NSURLConnection connectionWithRequest:postRequest delegate:self];
 }
 
 #pragma mark - NSURLConnectionDelegate Methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // Initialize the data object
-    self.downloadedData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the newly downloaded data
-    [self.downloadedData appendData:data];
+    
+    if (response) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        self.httpStatusCode = [NSString stringWithFormat:@"%li", (long)[httpResponse statusCode]];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -56,8 +47,9 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSString *responseText = [[NSString alloc] initWithData:self.downloadedData encoding: NSASCIIStringEncoding];
-    NSLog(@"Response Text: %@", responseText);
+    if (self.delegate) {
+        [self.delegate httpStatusCodeReturned:self.httpStatusCode];
+    }
     
 }
 

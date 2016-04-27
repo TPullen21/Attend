@@ -164,6 +164,7 @@
         self.checkedInStatusLabel.backgroundColor = [UIColor colorWithRed:0.48 green:0.63 blue:0.76 alpha:1.0];
         
         [self sendLocalNotificationWithMessage:[NSString stringWithFormat:@"Checked into %@", self.currentClassModuleName]];
+        NSLog(@"Checked into %@", self.currentClassModuleName);
     }
     
 }
@@ -215,6 +216,7 @@
 }
 
 - (void)sendLocalNotificationWithMessage:(NSString*)message {
+    
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];

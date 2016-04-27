@@ -15,7 +15,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString:@"F8AD3E82-0D91-4D9B-B5C7-7324744B2026"];
@@ -25,26 +24,18 @@
     // Log the authorization status of being able to use the user's location
     NSLog(@"%@", [self authorizationStatus]);
     
+    // Initialise and set up the location manager
     self.locationManager = [[CLLocationManager alloc] init];
-//    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-//        [self.locationManager requestAlwaysAuthorization];
-//    }
+    
     self.locationManager.delegate = self;
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     [self.locationManager startMonitoringForRegion:beaconRegion];
     [self.locationManager startRangingBeaconsInRegion:beaconRegion];
     [self.locationManager startUpdatingLocation];
     
-    // Ask for notifications authorization
+    // Ask for notifications authorisation, if not already authorised
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-    }
-    
-    // If we're launching from a notification, handle it
-    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
-        // Set icon badge number to zero
-        application.applicationIconBadgeNumber = 0;
     }
     
     return YES;
@@ -53,76 +44,51 @@
 #pragma mark - CLLocationManager Delegate Methods
 
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    
     [manager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
     [self.locationManager startUpdatingLocation];
     
     NSString *enterMessage = @"You entered the region";
-    
     NSLog(@"%@", enterMessage);
-    //[self sendLocalNotificationWithMessage:enterMessage];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    
     [manager stopRangingBeaconsInRegion:(CLBeaconRegion*)region];
     [self.locationManager stopUpdatingLocation];
     
     NSString *exitMessage = @"You left the region";
-    
     NSLog(@"%@", exitMessage);
-    //[self sendLocalNotificationWithMessage:exitMessage];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    NSString *message = @"";
     
     ViewController *viewController = (ViewController*)self.window.rootViewController;
     viewController.rangedBeacons = beacons;
     [viewController handleNewRangeOfBeacons];
     [viewController.tableView reloadData];
     
+    // Log to the debug console the proximity of the nearest beacon, if any
     if(beacons.count > 0) {
-        CLBeacon *nearestBeacon = beacons.firstObject;
-        if(nearestBeacon.proximity == self.lastProximity ||
-           nearestBeacon.proximity == CLProximityUnknown) {
-            return;
-        }
-        self.lastProximity = nearestBeacon.proximity;
-        
-        switch(nearestBeacon.proximity) {
-            case CLProximityFar:
-                message = @"You are far away from the beacon";
-                break;
-            case CLProximityNear:
-                message = @"You are near the beacon";
-                break;
-            case CLProximityImmediate:
-                message = @"You are in the immediate proximity of the beacon";
-                break;
-            case CLProximityUnknown:
-                return;
-        }
+        [self logProximityOfNearestBeacon:beacons];
     } else {
-        message = @"No beacons are nearby";
+        NSLog(@"No beacons are nearby");
     }
-    
-    NSLog(@"%@", message);
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+    // Get the application's state
     UIApplicationState state = [application applicationState];
+    
+    // If the application is currently being used, create a UI Alert for the notification
     if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attend"
                                                         message:notification.alertBody
                                                        delegate:self cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
     }
-    
-    // Request to reload table view data
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-    
-    // Set icon badge number to zero
-    application.applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Helper Methods
@@ -152,10 +118,32 @@
     return @"";
 }
 
--(void)sendLocalNotificationWithMessage:(NSString*)message {
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = message;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+- (void)logProximityOfNearestBeacon:(NSArray *)beacons {
+    
+    NSString *message = @"";
+    
+    CLBeacon *nearestBeacon = beacons.firstObject;
+    if(nearestBeacon.proximity == self.lastProximity ||
+       nearestBeacon.proximity == CLProximityUnknown) {
+        return;
+    }
+    self.lastProximity = nearestBeacon.proximity;
+    
+    switch(nearestBeacon.proximity) {
+        case CLProximityFar:
+            message = @"You are far away from the beacon";
+            break;
+        case CLProximityNear:
+            message = @"You are near the beacon";
+            break;
+        case CLProximityImmediate:
+            message = @"You are in the immediate proximity of the beacon";
+            break;
+        case CLProximityUnknown:
+            return;
+    }
+    
+    NSLog(@"%@", message);
 }
 
 #pragma mark - Unimplemented Default Methods
@@ -168,17 +156,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    
-    // Make sure the beacon ranging is still going on
-    NSUUID *beaconUUID = [[NSUUID alloc] initWithUUIDString:@"F8AD3E82-0D91-4D9B-B5C7-7324744B2026"];
-    NSString *regionIdentifier = @"pullen.BeaconModules";
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beaconUUID identifier:regionIdentifier];
-    
-    self.locationManager.pausesLocationUpdatesAutomatically = NO;
-    [self.locationManager startMonitoringForRegion:beaconRegion];
-    [self.locationManager startRangingBeaconsInRegion:beaconRegion];
-    [self.locationManager startUpdatingLocation];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

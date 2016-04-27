@@ -15,6 +15,5 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property CLProximity lastProximity;
 
-
 @end
 

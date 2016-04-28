@@ -64,6 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self hideTextFields];
+    [self showNoCurrentClassMessage];
     ((Label *)self.moduleNameLabel).verticalAlignment = UIControlContentVerticalAlignmentBottom;
 }
 
@@ -175,6 +176,9 @@
     if (-[self.datetimeOfLastBeaconWipe timeIntervalSinceNow] > BEACON_ARRAY_REFRESH_RATE) {
         self.beacons = [[NSMutableArray alloc] init];
         self.datetimeOfLastBeaconWipe = [[NSDate alloc] init];
+        if ([self currentClassHasEnded]) {
+            [self showNoCurrentClassMessage];
+        }
     }
     
     // For every ranged beacon, if we haven't already ranged it, add it to our local array and see if the current student has a class for that beacon
@@ -209,13 +213,11 @@
 
 - (void)showTextFields {
     [self.checkedInStatusLabel setHidden:NO];
-    [self.moduleNameLabel setHidden:NO];
     [self.dateFromToLabel setHidden:NO];
 }
 
 - (void)hideTextFields {
     [self.checkedInStatusLabel setHidden:YES];
-    [self.moduleNameLabel setHidden:YES];
     [self.dateFromToLabel setHidden:YES];
 }
 
@@ -224,6 +226,39 @@
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
+- (BOOL)currentClassHasEnded {
+    
+    NSDate *currentClassFinishDate = [self todaysDateWithSpecifiedTimeFromString:self.currentClassInfo[CURRENT_CLASS_FINISH_TIME_KEY]];
+    
+    // If the current class finish time is less than or equal to the current time, the class has ended
+    if ([currentClassFinishDate compare:[NSDate date]] != NSOrderedDescending) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (NSDate *)todaysDateWithSpecifiedTimeFromString:(NSString *)time {
+    // Split the time string (HH:mm) into hour and minute strings
+    NSArray *array = [time componentsSeparatedByString:@":"];
+    
+    // Get year, month and day values of today:
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *date = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
+    
+    // Set the hour and minute values from the given time string
+    [date setHour:[array[0] integerValue]];
+    [date setMinute:[array[1] integerValue]];
+    
+    return [calendar dateFromComponents:date];
+}
+
+- (void)showNoCurrentClassMessage {
+    
+    self.moduleNameLabel.text = @"No current class for any beacons within range.";
+    [self hideTextFields];
 }
 
 #pragma mark - Lazy Instantiation

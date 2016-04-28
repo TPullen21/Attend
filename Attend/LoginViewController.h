@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *studentNumberTextField;
 @property (strong, nonatomic) IBOutlet UITextField *tokenTextField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UILabel *incorrectValuesLabel;
 
 - (IBAction)loginButtonPressed:(id)sender;
 

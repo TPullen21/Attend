@@ -15,21 +15,31 @@ static int const CONSTANT = 100000;
 
 @implementation LoginViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.incorrectValuesLabel.hidden = YES;
+}
+
 - (IBAction)loginButtonPressed:(id)sender {
     NSString *studentNumber = self.studentNumberTextField.text;
     NSString *token = self.tokenTextField.text;
     
     if (studentNumber.length == 8 && token.length == 6) {
         if ([self tokenIsCorrect:token forStudentNumber:studentNumber]) {
-            NSLog(@"Correct!");
+            self.incorrectValuesLabel.hidden = YES;
             [[NSUserDefaults standardUserDefaults] setObject:studentNumber forKey:STUDENT_NUMBER_KEY];
             [[NSUserDefaults standardUserDefaults] setObject:token forKey:TOKEN_KEY];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {
-            NSLog(@"Not equal");
+            self.tokenTextField.text = @"";
+            self.incorrectValuesLabel.hidden = NO;
         }
+    } else {
+        self.tokenTextField.text = @"";
+        self.incorrectValuesLabel.hidden = NO;
     }
 }
 

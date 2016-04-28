@@ -189,6 +189,12 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect student number/token pair" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFG-wA-xA7">
+                                <rect key="frame" x="20" y="314" width="560" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.30196078431372547" green="0.34509803921568627" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -198,7 +204,10 @@
                             <constraint firstItem="IvX-eI-vUr" firstAttribute="leading" secondItem="Hnv-z2-soX" secondAttribute="leading" constant="20" id="Orc-MW-puY"/>
                             <constraint firstItem="VAe-IP-OgF" firstAttribute="leading" secondItem="Hnv-z2-soX" secondAttribute="leading" id="WHR-uo-Kci"/>
                             <constraint firstItem="JT0-gz-guo" firstAttribute="leading" secondItem="Hnv-z2-soX" secondAttribute="leading" constant="20" id="Xvq-ae-Y1e"/>
+                            <constraint firstItem="gFG-wA-xA7" firstAttribute="top" secondItem="Pch-93-l7j" secondAttribute="bottom" constant="8" id="Xxl-Mt-wke"/>
                             <constraint firstItem="Pch-93-l7j" firstAttribute="top" secondItem="JT0-gz-guo" secondAttribute="bottom" constant="27" id="bCn-n2-908"/>
+                            <constraint firstAttribute="trailing" secondItem="gFG-wA-xA7" secondAttribute="trailing" constant="20" id="brG-1p-tuG"/>
+                            <constraint firstItem="gFG-wA-xA7" firstAttribute="leading" secondItem="Hnv-z2-soX" secondAttribute="leading" constant="20" id="eE6-rE-PR9"/>
                             <constraint firstAttribute="trailing" secondItem="JT0-gz-guo" secondAttribute="trailing" constant="20" id="iWP-rj-Duy"/>
                             <constraint firstAttribute="trailing" secondItem="Pch-93-l7j" secondAttribute="trailing" constant="20" id="oho-m1-CP8"/>
                             <constraint firstAttribute="trailing" secondItem="IvX-eI-vUr" secondAttribute="trailing" constant="20" id="pRH-Wb-YiC"/>
@@ -207,6 +216,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="incorrectValuesLabel" destination="gFG-wA-xA7" id="FEg-e4-9I9"/>
                         <outlet property="loginButton" destination="Pch-93-l7j" id="0uO-Va-5k4"/>
                         <outlet property="studentNumberTextField" destination="IvX-eI-vUr" id="pSC-9F-TPb"/>
                         <outlet property="tokenTextField" destination="JT0-gz-guo" id="Qxo-fZ-b3M"/>

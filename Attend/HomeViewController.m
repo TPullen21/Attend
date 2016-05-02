@@ -94,34 +94,19 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    CLBeacon *beacon = (CLBeacon*)[self.beacons objectAtIndex:indexPath.row];
-    NSString *proximityLabel = @"";
-    switch (beacon.proximity) {
-        case CLProximityFar:
-            proximityLabel = @"Far";
-            break;
-        case CLProximityNear:
-            proximityLabel = @"Near";
-            break;
-        case CLProximityImmediate:
-            proximityLabel = @"Immediate";
-            break;
-        case CLProximityUnknown:
-            proximityLabel = @"Unknown";
-            break;
-    }
+    CLBeacon *beacon = [self.beacons objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = proximityLabel;
+    cell.textLabel.text = [self proximityLabelForBeaconProximity:beacon.proximity];
     
-    NSString *detailLabel = [NSString stringWithFormat:@"Major: %d, Minor: %d, UUID: %@",
-                             beacon.major.intValue, beacon.minor.intValue, beacon.proximityUUID.UUIDString];
-    cell.detailTextLabel.text = detailLabel;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Minor: %d, Major: %d, UUID: %@",
+                                 beacon.minor.intValue, beacon.major.intValue, beacon.proximityUUID.UUIDString];
     
     return cell;
 }
 
 #pragma mark - HTTPGetRequest Protocol Methods
 
+// Called when the current class information has been downloaded
 - (void)dictionaryDownloaded:(NSDictionary *)dict {
     
     if (dict) {
@@ -151,6 +136,7 @@
 
 #pragma mark - HTTPPostRequest Protocol Methods
 
+// Will be called when the attendance has been recorded
 - (void)httpStatusCodeReturned:(NSString *)httpHtatusCode {
     
     // If the status code returned for the attend POST request, the attendance has successfully been recorded
@@ -259,6 +245,28 @@
     
     self.moduleNameLabel.text = @"No current class for any beacons within range.";
     [self hideTextFields];
+}
+
+- (NSString *)proximityLabelForBeaconProximity:(CLProximity)beaconProximity {
+    
+    NSString *proximityLabel = @"";
+    
+    switch (beaconProximity) {
+        case CLProximityFar:
+            proximityLabel = @"Far";
+            break;
+        case CLProximityNear:
+            proximityLabel = @"Near";
+            break;
+        case CLProximityImmediate:
+            proximityLabel = @"Immediate";
+            break;
+        case CLProximityUnknown:
+            proximityLabel = @"Unknown";
+            break;
+    }
+    
+    return proximityLabel;
 }
 
 #pragma mark - Lazy Instantiation

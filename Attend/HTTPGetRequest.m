@@ -23,6 +23,7 @@
     // Create the request
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:jsonFileUrl];
     
+    // For every key given in the dictionary, add a header to the HTTP request
     for (NSString *key in [headerDictionary allKeys]) {
         [urlRequest addValue:headerDictionary[key] forHTTPHeaderField:key];
     }

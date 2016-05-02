@@ -23,6 +23,7 @@
     
     [postRequest setHTTPMethod:@"POST"];
     
+    // For every key given in the dictionary, add a header to the HTTP request
     for (NSString *key in [dictionary allKeys]) {
         [postRequest addValue:dictionary[key] forHTTPHeaderField:key];
     }
@@ -46,6 +47,7 @@
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
+// Just return the HTTP status code
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (self.delegate) {
         [self.delegate httpStatusCodeReturned:self.httpStatusCode];
